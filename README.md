@@ -101,40 +101,115 @@ From the above characteristic table, we can directly write the next state equati
 Q(t+1)=T′Q(t)+TQ(t)′
 ⇒Q(t+1)=T⊕Q(t)
 
-### Procedure
-/* write all the steps invloved */
+## Procedure:
+1.Using nand gates and wires construct SR flipflop.
+
+2.Repeat same steps to constuct JK,D,T flipflops
+
+3.find Rtl logic and timing diagram for all flipflops
+
+4.End the program.
 
 
 
-### PROGRAM 
-/*
+## PROGRAM 
 Program for flipflops  and verify its truth table in quartus using Verilog programming.
-Developed by: 
-RegisterNumber:  
-*/
+### Developed by: Mohamed Nadheem N
+### RegisterNumber: 23014217
 
 
+### CODE FOR SR FLIPFLOP:
+```
+module flipflops(S,R,Q,Qbar,clk);
+input S,R,clk;
+output reg Q,Qbar;
+initial Q = 0;
+initial Qbar = 1;
+always @(posedge clk)
+begin
+Q = S|((~R)&Q);
+Qbar = R|((~S)&(~Qbar));
+end
+endmodule
+```
+
+### CODE FOR JK FLIPFLOP:
+```
+module JK(J,K,Q,Qbar,clk);
+input J,K,clk;
+output reg Q,Qbar;
+initial Q = 0;
+initial Qbar = 1;
+always @(posedge clk)
+begin
+Q = (((~K)&Q)|(J&(~Q)));
+Qbar = ((~J)&Qbar)|((~K)&(~Qbar)); 
+end
+endmodule
+```
+### CODE FOR D FLIPFLOP:
+```
+module Dflipflop(D,Q,Qbar,clk);
+input D,clk;
+output reg Q,Qbar;
+initial Q = 0;
+initial Qbar = 1;
+always @(posedge clk)
+begin
+Q = D;
+Qbar = ~D;
+end
+endmodule
+```
+### CODE FOR T FLIPFLOP:
+```
+module Tflipflop(T,Q,Qbar,clk);
+input T,clk;
+output reg Q,Qbar;
+initial Q = 0;
+initial Qbar = 1;
+always @(posedge clk)
+begin
+Q = ((T&(~Q))|((~T)&Q));
+Qbar = ((~T)&Qbar)|(T&(~Qbar));
+end
+endmodule
+```
+## OUTPUT:
+## RTL VIEW OF SR FLIPFLOP:
+
+![image](/SR%20RTL.png)
+
+## RTL VIEW OF JK FLIPFLOP:
+
+![image](/JK%20RTL.png)
+
+## RTL VIEW OF D FLIPFLOP:
+
+![image](/D%20RTL.png)
+
+## RTL VIEW OF T FLIPFLOP:
+
+![image](/T%20RTL.png)
+
+## TIMING DIAGRAM OF SR FLIPFLOP:
+
+![image](/SR%20WAVE.png)
+
+## TIMING DIAGRAM OF JK FLIPFLOP:
+
+![image](/JK%20WAVE.png)
+
+## TIMING DIAGRAM OF D FLIOFLOP:
+
+![image](/D%20WAVE.png)
 
 
+## TIMING DIAGRAM OF T FLIPFLOP:
+
+![image](/T%20WAVE.png)
 
 
-### RTL LOGIC FOR FLIPFLOPS 
+### RESULTS :
 
-
-
-
-
-
-
-
-
-### TIMING DIGRAMS FOR FLIP FLOPS 
-
-
-
-
-
-
-
-
-### RESULTS 
+All the flipflops are implementde using verilog and their functionality has been validated using their functional tables.
